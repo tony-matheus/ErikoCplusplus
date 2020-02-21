@@ -16,7 +16,9 @@ class String {
     String(char);
     String(const char*);
     String(const String &);
+    int length() const;
     void operator =(const String&);
+    friend bool operator ==(const String &, const String &);
   private:
     char *value;
     int size;
@@ -37,6 +39,14 @@ String::String(const String&word){
   value = new char[size];
   for(int i = 0; i < size; i++){
     value[i] = word.value[i];
+  }
+}
+
+int String::length() const{
+  if(value != nullptr){
+    return size;
+  }else{
+    return 0;
   }
 }
 
@@ -64,8 +74,15 @@ void String::operator =(const String&word)
   size = word.size;
 }
 
-bool String::operator ==(const String & word, const String & anotherWord){
-  
+bool operator ==(const String & word, const String & anotherWord){
+  if(word.length() == anotherWord.length()){
+    for(int i = 0; i < word.length(); i++){
+      if(word.value[i] != anotherWord.value[i]) {
+        return false;
+      }
+    }
+  }
+  return false;
 }
 
 
