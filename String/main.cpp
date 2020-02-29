@@ -30,36 +30,40 @@ void testA() {
   cout << "Finish Test A" << endl << endl;
 }
 
-void TestB(){
+void testB(){
   cout << "Starting Test B" << endl;
   String testB;
   testB = "Test B";
   
-  String testBI;
+//  cout << testB << endl;
+  
+  String testBI = "Test BI";
   testBI = testB;
+  cout << testBI << "Test()" << endl;
+
   cout << "Finish Test B" << endl << endl;
 }
 
-void TestC(){
+void testC(){
   cout << "Starting Test C" << endl;
   String testC;
-  //  testC = "Test C 1 "+"Test C 2 ";
-  
-  //  String testCI;
-  //  testCI = testC;
+//    testC = "Test C 1 "+"Test C 2 ";
+//
+//    String testCI;
+//    testCI = testC;
   cout << "Finish Test C" << endl << endl;
 }
 
 
-void TestD(){
+void testD(){
   cout << "Starting Test D" << endl;
-  String testD = "Test D before ";
-    testD += "After";
+  String testD = "tem 5";
+//    testD += "";
   cout << testD << endl;
-//  
-//  String testDI = "Test D 2 before";
-//  testDI += testD;
-  cout << testDI << endl;
+//
+  String testDI = "n tem 5";
+  testDI += testD;
+  cout << testDI << "dusahduashd" << endl;
   
   cout << "Finish Test D" << endl << endl;
 }
@@ -73,18 +77,34 @@ void testE(){
 
 void testF() {
   cout << "Starting Test F" << endl;
-  String testF = "Testando";
+  String testF = "Short";
   
-//  int index = testF.indexOf('T'); // not implemented
+  int index;
+  index = testF.indexOf('S');
+  cout << index << endl;
+  
+  index = testF.indexOf('h');
+  cout << index << endl;
+  
+  index = testF.indexOf('o');
+  cout << index << endl;
+  
+  index = testF.indexOf('r');
+  cout << index << endl;
+  
+  index = testF.indexOf('t');
+  cout << index << endl;
+  
+  index = testF.indexOf('Z');
+  cout << index << endl;
   cout << "Finish Test F" << endl << endl;
-  
-//  cout << index << endl;
 }
 
 void testG() {
   cout << "Starting Test G" << endl;
   String uppercase = "grande";
-//  uppercase.upcase(0, uppercase.length() - 1);
+  cout << uppercase << endl;
+  uppercase.upcase(0, uppercase.length());
   cout << uppercase << endl;
   cout << "Finish Test G" << endl << endl;
 }
@@ -92,19 +112,25 @@ void testG() {
 void testH() {
   cout << "Starting Test H" << endl;
   String lowercase = "PEQUENO";
-//  lowercase.downcase(0, lowercase.length() - 1);
+  cout << lowercase << endl;
+  lowercase.downcase(0, lowercase.length());
   cout << lowercase << endl;
   cout << "Finish Test H" << endl << endl;
 }
 
 void testI() {
-  // todo test i
+  cout << "Starting Test H" << endl;
+  String togglecase = "InVeRtIdO";
+  cout << togglecase << endl;
+  togglecase.togglecase(0, togglecase.length());
+  cout << togglecase << endl;
+  cout << "Finish Test H" << endl << endl;
 }
 
 void testJ() {
   String testJ = "Primeiro é P";
-//  char first = testJ[0];
-//  cout << first << " P " << endl;
+  char first = testJ[0];
+  cout << first << " P " << endl;
 }
 
 void testK(){
@@ -127,31 +153,52 @@ void testK(){
     cout << "not working 2";
   }
   cout << endl;
+  char char1 = 'b', char2 = 'a';
+  String string1 = "b", string2 = "a";
+  if(char1 > char2 && string1 > string2){
+    cout << "working" << endl;
+  }else{
+    cout << "not working" << endl;
+  }
+  
+  
+  char char3 = 'a',char4 = 'b';
+  String string3 = "a", string4 = "b";
+  if(char3 < char4 && string3 < string4){
+    cout << "working" << endl;
+  }else{
+    cout << "not working" << endl;
+  }
+  
+  char char5 = 'a', char6 = 'a';
+  String string5 = "a", string6 = "a";
+  if(char5 >= char6 && string5 >= string6){
+    cout << "working" << endl;
+  }else{
+    cout << "not working" << endl;
+  }
+  
+  char char7 = 'b', char8 = 'b';
+  String string7 = "b", string8 = "b";
+  if(char7 <= char8 && string7 <= string8 && string7 <= "d" && char7 <= 'a'){
+    cout << "working" << endl;
+  }else{
+    cout << "not working" << endl;
+  }
+  
   cout << "item K completed" << endl;
-
 }
 
 int main(int argc, const char * argv[]) {
-//  String a = "dashduh";
-//  String b;
-//  cout << &a << endl;
-//  cout << &b << endl;
-//  b = a;
-//
-//  cout << &a << endl;
-//  cout << &b << endl;
   testA();
-  String a;
-  a = "nothing";
-  cout << a << "nothing" << endl;
-  String b = "meu pau te arriba";
-  cout << b <<endl;
-  String c = b;
-  cout << c <<endl;
-  cout << "item A completed" << endl;
-
-  a = "meu piru de asa";
-  a += "b";
-
+  testB();
+  testD();
+  testF();
+  testG();
+  testH();
+  testI();
+  testJ();
   testK();
+  
+  
 }

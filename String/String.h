@@ -8,6 +8,7 @@
 
 #ifndef String_h
 #define String_h
+#include <typeinfo>
 
 class String {
 public:
@@ -17,16 +18,33 @@ public:
   String(const String&);
   ~String(void);
   
+  
+  int length() const;
+  int indexOf(char) const;
+  void upcase(int, int);
+  void downcase(int, int);
+  void togglecase(int, int);
+  
   void operator =(const char*);
   void operator =(const String&);
-  void operator +(const String&); //not implemented
-  void operator += (const char*); // not implemented
-  void operator += (const String&); // not implemented
-  int length() const;
+  
+  void operator += (const char*);
+  void operator += (const String&);
+  // a = "suadha" + "saudasudh"l
+  // a = b + "saduhas"
+  friend String operator +(const char*, const String&);
+  
+  char& operator[] (unsigned int);
   
   friend bool operator ==(const String &, const String &);
   friend bool operator !=(const String &, const String &);
+  friend bool operator >(const String &, const String &);
+  friend bool operator <(const String &, const String &);
+  friend bool operator >=(const String &, const String &);
+  friend bool operator <=(const String &, const String &);
+  
   friend std::ostream & operator<<(std::ostream &, const String &);
+  friend std::istream & operator>>(std::istream &, const String &);
 private:
   char *value;
   int size;
@@ -51,12 +69,6 @@ String::String(){
   size = 0;
 }
 
-String::~String(void)
-{
-  delete[] value;
-  value = nullptr;
-}
-
 String::String(const char word){
   value = new char[1];
   value[0] = word;
@@ -71,6 +83,12 @@ String::String(const String&word){
   }
 }
 
+String::~String(void)
+{
+  std::cout << this->value << std::endl;
+  delete[] this->value;
+  this->value = nullptr;
+}
 
 String::String(const char *word){
   const char * t = word;
@@ -89,12 +107,15 @@ String::String(const char *word){
   }
   size = j;
 }
+
+// String a = "dsahdu";
+// String b = "udhsaduh"
 // a = b
 void String::operator =(const String & word){
+  
   const char * newWord = word.value;
   this->value = new char[word.size];
   int j;
-  delete[] word.value;
   for(j = 0; *newWord; newWord++, j++)
   {
     this->value[j] = *newWord;
@@ -121,7 +142,12 @@ void String::operator =(const char* word)
   size = j;
 }
 
-void String::operator+=(const char* word){
+
+//char* String::operator +(const char* word){
+//  
+//}
+// a += "dasiudhasud"
+void String::operator +=(const char* word){
   const char * newWord = word;
   const char * oldWord = this->value;
   int i = 0;
@@ -134,19 +160,39 @@ void String::operator+=(const char* word){
   {
     value[j] = *oldWord;
   }
-  std::cout << value << std::endl;
   for(j = j; *newWord; newWord++, j++)
   {
     value[j] = *newWord;
   }
-  
+
+  std::cout << value << std::endl;
   size = j;
 }
 //void operator += (const String&);
-//void String::operator +=(const String &word){
-//  value = word.value;
-//  size = word.size;
-//}
+// a += b
+void String::operator +=(const String &word){
+  const char * newWord = word.value; // char *
+  const char * oldWord = this->value; // char *
+  
+  value = new char[size + word.size];
+  
+  int j;
+  for(j = 0; *oldWord; oldWord++, j++)
+  {
+    value[j] = *oldWord;
+  }
+  
+  for(int i = 0 ; j < size + word.size; i++, j++)
+  {
+    value[j] = newWord[i];
+  }
+  size = j;
+}
+
+char & String::operator[] (unsigned int x)
+{
+  return value[x];
+}
 
 //length
 int String::length() const{
@@ -154,6 +200,36 @@ int String::length() const{
     return size;
   }else{
     return 0;
+  }
+}
+
+int String::indexOf(char letter) const{
+  for(int i = 0; i < size; i++){
+    if(value[i] == letter) { return i; }
+  }
+  return -1;
+}
+
+
+void String::upcase(int start, int finish){
+  for( int i = start; i < finish; i++){
+    value[i] = value[i] - 32;
+  }
+}
+
+void String::downcase(int start, int finish){
+  for( int i = start; i < finish; i++){
+    value[i] = value[i] + 32;
+  }
+}
+
+void String::togglecase(int start, int finish){
+  for( int i = start; i < finish; i++){
+    if(value[i] >= 'a' && value[i] <= 'z'){
+      value[i] = value[i] - 32;
+    }else if(value[i] >= 'A' && value[i] <= 'Z'){
+      value[i] = value[i] + 32;
+    }
   }
 }
 
@@ -190,6 +266,77 @@ bool operator !=(const String & word, const String & anotherWord){
   return false;
 }
 
+bool operator >(const String & word, const String & anotherWord){
+  int wordValue = 0;
+  int anotherWordValue = 0;
+  for(int i = 0; i < word.size; i++){
+    wordValue += word.value[i];
+  }
+  
+  for(int i = 0; i < anotherWord.size; i++){
+    anotherWordValue += anotherWord.value[i];
+  }
+  
+//  std::cout << wordValue << std::endl;
+//  std::cout << anotherWordValue << std::endl;
+//  std::cout << (wordValue > anotherWordValue) << ">" << std::endl;
+  return (wordValue > anotherWordValue);
+}
+
+bool operator <(const String & word, const String & anotherWord){
+  int wordValue = 0;
+  int anotherWordValue = 0;
+  
+  for(int i = 0; i < word.size; i++){
+    wordValue += word.value[i];
+  }
+  
+  for(int i = 0; i < anotherWord.size; i++){
+    anotherWordValue += anotherWord.value[i];
+  }
+  
+//  std::cout << wordValue << std::endl;
+//  std::cout << anotherWordValue << std::endl;
+//  std::cout << (wordValue < anotherWordValue)<< "<" << std::endl;
+  return (wordValue < anotherWordValue);
+}
+
+bool operator <=(const String & word, const String & anotherWord){
+  int wordValue = 0;
+  int anotherWordValue = 0;
+  
+  for(int i = 0; i < word.size; i++){
+    wordValue += word.value[i];
+  }
+  
+  for(int i = 0; i < anotherWord.size; i++){
+    anotherWordValue += anotherWord.value[i];
+  }
+  
+//  std::cout << wordValue << std::endl;
+//  std::cout << anotherWordValue << std::endl;
+//  std::cout << (wordValue <= anotherWordValue)<< "<=" << std::endl;
+  return (wordValue <= anotherWordValue);
+}
+
+bool operator >=(const String & word, const String & anotherWord){
+  int wordValue = 0;
+  int anotherWordValue = 0;
+  
+  for(int i = 0; i < word.size; i++){
+    wordValue += word.value[i];
+  }
+  
+  for(int i = 0; i < anotherWord.size; i++){
+    anotherWordValue += anotherWord.value[i];
+  }
+  
+//  std::cout << wordValue << std::endl;
+//  std::cout << anotherWordValue << std::endl;
+//  std::cout << (wordValue >= anotherWordValue)<< ">=" << std::endl;
+  return (wordValue >= anotherWordValue);
+}
+
 std::ostream & operator<<(std::ostream &os, const String &s)
 {
   for(int i = 0; i < s.size; i++)
@@ -198,6 +345,15 @@ std::ostream & operator<<(std::ostream &os, const String &s)
   }
   return os;
 }
+
+//std::istream operator>> std::istream & operator>>(std::istream &in, const String &s)
+//{
+//  for(int i = 0; i < s.size; i++)
+//  {
+//    in >> s.value[i];
+//  }
+//  return in;
+//}
 
 
 
