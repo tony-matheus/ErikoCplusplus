@@ -38,7 +38,13 @@ public:
   
   friend bool operator ==(const String &, const String &);
   friend bool operator !=(const String &, const String &);
-  friend bool operator >(const String &, const String &);
+  
+  // String a ;
+  friend bool operator >(const String &, const String &); // a > b
+  friend bool operator >(const String &, const char*); // a > "sadasd"
+  friend bool operator >(const char *, const String &); // "sadasd" > a
+  
+  
   friend bool operator <(const String &, const String &);
   friend bool operator >=(const String &, const String &);
   friend bool operator <=(const String &, const String &);
@@ -145,15 +151,17 @@ void String::operator =(const char* word)
 
 //char* String::operator +(const char* word){
 //  
-//}
-// a += "dasiudhasud"
+//} a = "felipe"
+// a += " strozberg"
 void String::operator +=(const char* word){
   const char * newWord = word;
   const char * oldWord = this->value;
+  
   int i = 0;
   while(*word++){
     i++;
   }
+  
   value = new char[size + i];
   int j;
   for(j = 0; *oldWord; oldWord++, j++)
@@ -189,12 +197,14 @@ void String::operator +=(const String &word){
   size = j;
 }
 
+// String a = "tony";
+// a[0] = 't'
 char & String::operator[] (unsigned int x)
 {
   return value[x];
 }
 
-//length
+// length
 int String::length() const{
   if(value != nullptr){
     return size;
@@ -202,7 +212,7 @@ int String::length() const{
     return 0;
   }
 }
-
+//
 int String::indexOf(char letter) const{
   for(int i = 0; i < size; i++){
     if(value[i] == letter) { return i; }
@@ -222,7 +232,8 @@ void String::downcase(int start, int finish){
     value[i] = value[i] + 32;
   }
 }
-
+// toNY
+// TOny
 void String::togglecase(int start, int finish){
   for( int i = start; i < finish; i++){
     if(value[i] >= 'a' && value[i] <= 'z'){
@@ -266,21 +277,31 @@ bool operator !=(const String & word, const String & anotherWord){
   return false;
 }
 
+//bool operator >(const String & word, const String & anotherWord){
+//  int wordValue = 0;
+//  int anotherWordValue = 0;
+//  for(int i = 0; i < word.size; i++){
+//    wordValue += word.value[i];
+//  }
+//
+//  for(int i = 0; i < anotherWord.size; i++){
+//    anotherWordValue += anotherWord.value[i];
+//  }
+//  return (wordValue > anotherWordValue);
+//}
+
 bool operator >(const String & word, const String & anotherWord){
-  int wordValue = 0;
-  int anotherWordValue = 0;
-  for(int i = 0; i < word.size; i++){
-    wordValue += word.value[i];
+  return (word.size > anotherWord.size)
+}
+
+bool operator >(const String & word, const char* anotherWord){
+  const char * newWord = anotherWord;
+  int length = 0;
+  while(*newWord++){
+    length++;
   }
   
-  for(int i = 0; i < anotherWord.size; i++){
-    anotherWordValue += anotherWord.value[i];
-  }
-  
-//  std::cout << wordValue << std::endl;
-//  std::cout << anotherWordValue << std::endl;
-//  std::cout << (wordValue > anotherWordValue) << ">" << std::endl;
-  return (wordValue > anotherWordValue);
+  return (word.size > length);
 }
 
 bool operator <(const String & word, const String & anotherWord){
@@ -313,9 +334,6 @@ bool operator <=(const String & word, const String & anotherWord){
     anotherWordValue += anotherWord.value[i];
   }
   
-//  std::cout << wordValue << std::endl;
-//  std::cout << anotherWordValue << std::endl;
-//  std::cout << (wordValue <= anotherWordValue)<< "<=" << std::endl;
   return (wordValue <= anotherWordValue);
 }
 
