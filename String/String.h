@@ -159,10 +159,61 @@ void String::operator =(const char* word)
   size = j;
 }
 
+// a + "asdqwedu"
+char* String::operator +(const char* word){
+  const char * newWord = word;
+  const char * oldWord = this->value;
+  
+  int i = 0;
 
-//char* String::operator +(const char* word){
-//  
-//} a = "felipe"
+  while(*word++){
+    i++;
+  }
+
+  value = new char[size + i];
+
+  for(j = 0; *oldWord; oldWord++, j++)
+  {
+    value[j] = *oldWord;
+  }
+  for(j = j; *newWord; newWord++, j++)
+  {
+    value[j] = *newWord;
+  }
+
+  delete[] newWord;
+  delete[] oldWord;
+
+  std::cout << value << std::endl;
+  size = j;
+}
+
+// a + b
+char* String::operator +(const String& word){
+  const char * newWord = word.value; // char *
+  const char * oldWord = this->value; // char *
+  
+  value = new char[size + word.size];
+  
+  int j;
+  for(j = 0; *oldWord; oldWord++, j++)
+  {
+    value[j] = *oldWord;
+  }
+  
+  for(int i = 0 ; j < size + word.size; i++, j++)
+  {
+    value[j] = newWord[i];
+  }
+
+  delete[] newWord;
+  delete[] oldWord;
+
+  std::cout << value << std::endl;
+  size = j;
+}
+
+//a = "felipe"
 // a += " strozberg"
 void String::operator +=(const char* word){
   const char * newWord = word;
