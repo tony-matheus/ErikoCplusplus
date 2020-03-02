@@ -366,7 +366,7 @@ bool operator >(const String & word, const char* anotherWord){
   while(*newWord++){
     length++;
   }
-  
+
   return (word.size > length);
 }
 
@@ -377,7 +377,7 @@ bool operator >(const char* anotherWord, const String & word){
   while(*newWord++){
     length++;
   }
-  
+
   return (length > word.size);
 }
 
@@ -386,15 +386,15 @@ bool operator >(const char* anotherWord, const String & word){
 bool operator <(const String & word, const String & anotherWord){
   int wordValue = 0;
   int anotherWordValue = 0;
-  
+
   for(int i = 0; i < word.size; i++){
     wordValue += word.value[i];
   }
-  
+
   for(int i = 0; i < anotherWord.size; i++){
     anotherWordValue += anotherWord.value[i];
   }
-  
+
 //  std::cout << wordValue << std::endl;
 //  std::cout << anotherWordValue << std::endl;
 //  std::cout << (wordValue < anotherWordValue)<< "<" << std::endl;
@@ -408,7 +408,7 @@ bool operator <(const String & word, const char* anotherWord){
   while(*newWord++){
     length++;
   }
-  
+
   return (word.size < length);
 }
 
@@ -419,7 +419,7 @@ bool operator <(const char* anotherWord, const String & word){
   while(*newWord++){
     length++;
   }
-  
+
   return (length < word.size);
 }
 
@@ -428,15 +428,15 @@ bool operator <(const char* anotherWord, const String & word){
 bool operator <=(const String & word, const String & anotherWord){
   int wordValue = 0;
   int anotherWordValue = 0;
-  
+
   for(int i = 0; i < word.size; i++){
     wordValue += word.value[i];
   }
-  
+
   for(int i = 0; i < anotherWord.size; i++){
     anotherWordValue += anotherWord.value[i];
   }
-  
+
   return (wordValue <= anotherWordValue);
 }
 
@@ -446,18 +446,18 @@ bool operator <=(const char* anotherWord, const String & word){
   while(*newWord++){
     length++;
   }
-  
+
   return (length <= word.size);
 }
 // "asdd" <= a
-bool operator <=(const char* anotherWord, const String & word){
+bool operator <=(const String & word, const char* anotherWord){
   const char * newWord = anotherWord;
   int length = 0;
   while(*newWord++){
     length++;
   }
-  
-  return (length <= word.size);
+
+  return (word.size <= length);
 }
 
 //--------------------------------------------------------------
@@ -465,15 +465,15 @@ bool operator <=(const char* anotherWord, const String & word){
 bool operator >=(const String & word, const String & anotherWord){
   int wordValue = 0;
   int anotherWordValue = 0;
-  
+
   for(int i = 0; i < word.size; i++){
     wordValue += word.value[i];
   }
-  
+
   for(int i = 0; i < anotherWord.size; i++){
     anotherWordValue += anotherWord.value[i];
   }
-  
+
   return (wordValue >= anotherWordValue);
 }
 
@@ -483,18 +483,18 @@ bool operator >=(const char* anotherWord, const String & word){
   while(*newWord++){
     length++;
   }
-  
+
   return (length >= word.size);
 }
 
-bool operator >=(const char* anotherWord, const String & word){
+bool operator >=(const String & word, const char* anotherWord){
   const char * newWord = anotherWord;
   int length = 0;
   while(*newWord++){
     length++;
   }
-  
-  return (length >= word.size);
+
+  return (word.size >= length);
 }
 
 //--------------------------------------------------------------
