@@ -33,12 +33,20 @@ void testA() {
 void testB(){
   cout << "Starting Test B" << endl;
   String testB;
+  String test1 = "Test B", test2 = "Test BI";
   testB = "Test B";
 
 //  cout << testB << endl;
-
   String testBI = "Test BI";
+  if(testB < testBI){
+    cout << testBI <<"sei la" << endl;
+  }
   testBI = testB;
+  
+  if(testB == testBI){
+    cout <<" Works!!" << endl;
+  }
+
   cout << testBI << " Test()" << endl;
 
   cout << "Finish Test B" << endl << endl;
@@ -68,7 +76,7 @@ void testD(){
 //
   String testDI = "Felipe";
   testDI += testD;
-  cout << testDI << "rsrs" << endl;
+  cout << testDI << " rsrs" << endl;
 
   cout << "Finish Test D" << endl << endl;
 }
@@ -196,19 +204,151 @@ void testK(){
 
   cout << "Finish Test K" << endl << endl;
 }
+// >
+int testK1(){
+  cout << "Start Teste K1" << endl;
+  String a = "a", b = "b";
+  cout << a << endl;
+  cout << b << endl;
+  if( a > b ){
+    cout << "NOT WORKING First" << endl;
+    return 0;
+  }
+  a = "aa";
+  if( a > "bbb"){
+    cout << "NOT WORKING Second" << endl;
+    return 0;
+  }
+  if( "1" > a ){
+    cout << "NOT WORKING Thrid" << endl;
+    return 0;
+  }
+  
+  cout << "> Test aproved" << endl;
+  return 0;
+}
+// <
+int testK2(){
+  cout << "Start Teste K2" << endl;
+  String a = "a", b = "b";
+  cout << a << endl;
+  cout << b << endl;
+  if( a < b ){
+    cout << "NOT WORKING First" << endl;
+    return 0;
+  }
+  a = "aa";
+  if( a < "b"){
+    cout << "NOT WORKING Second" << endl;
+    return 0;
+  }
+  if( "bb" < a ){
+    cout << "NOT WORKING Thrid" << endl;
+    return 0;
+  }
+  
+  cout << "< Test aproved" << endl;
+  return 0;
+}
+//>=
+int testK3(){
+  cout << "Start Teste K3" << endl;
+  String a = "aa", b = "b";
+  cout << a << endl;
+  cout << b << endl;
+  if( b >= a ){
+    cout << "NOT WORKING First" << endl;
+    return 0;
+  }else if(a >= b){
+    cout << ">= Test aproved first" << endl;
+  }
+  
+  if( a >= "bbb"){
+    cout << "NOT WORKING Second" << endl;
+    return 0;
+  }else if(a < "bbb"){
+    cout << ">= Test aproved second" << endl;
+  }
+  
+  if( "b" >= a ){
+    cout << "NOT WORKING Thrid" << endl;
+    return 0;
+  }else if( a >= "b"){
+    cout << ">= Test aproved third" << endl;
+  }
+  
+  cout << ">= Test aproved" << endl;
+  return 0;
+}
+
+int testK4(){
+  cout << "Start Teste K4" << endl;
+  String a = "a", b = "bb";
+  cout << a << endl;
+  cout << b << endl;
+  if( b <= a ){
+    cout << "NOT WORKING First" << endl;
+    return 0;
+  }else if(a <= b){
+    cout << "<= Test aproved first" << endl;
+  }
+  
+  if( b <= "b"){
+    cout << "NOT WORKING Second" << endl;
+    return 0;
+  }else if(b < "bbb"){
+    cout << "<= Test aproved second" << endl;
+  }
+  
+  if( "bbb" <= b ){
+    cout << "NOT WORKING Thrid" << endl;
+    return 0;
+  }else if( b <= "bbb"){
+    cout << "<= Test aproved third" << endl;
+  }
+  
+  cout << "<= Test aproved" << endl;
+  return 0;
+}
+
+
+int testK5(){
+  cout << "Start Teste K5" << endl;
+  String a = "c", b = "b";
+  cout << a << endl;
+  cout << b << endl;
+  if( b != a ){
+    cout << "NOT WORKING First" << endl;
+    return 0;
+  }
+  cout << "dsadasd" << endl;
+  cout << a << endl;
+  b = a;
+  cout << a << endl;
+  cout << b << endl;
+  
+  cout << "dsadasd" << endl;
+  if(a == b){
+    cout << "!= && == Test aproved" << endl;
+  }
+  
+  return 0;
+}
 
 int main(int argc, const char * argv[]) {
-  testA();
+//  testA();
   testB();
-  testC();
-  testD();
-  testE();
-  testF();
-  testG();
-  testH();
-  testI();
-  testJ();
-  testK();
-
-
+//  testC();
+//  testD();
+//  testE();
+//  testF();
+//  testG();
+//  testH();
+//  testI();
+//  testJ();
+//  testK1();
+//  testK2();
+//  testK3();
+//  testK4();
+//  testK5();
 }

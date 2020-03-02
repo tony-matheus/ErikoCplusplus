@@ -81,7 +81,7 @@ private:
 
 //& Is used to get the address
 String::String(){
-  value = '\0';
+  value = nullptr;
   size = 0;
 }
 
@@ -101,13 +101,12 @@ String::String(const String&word){
 
 String::~String(void)
 {
-  //std::cout << this->value << std::endl;
   delete[] this->value;
-  //this->value = '\0';
+  this->value = nullptr;
 }
 
 String::String(const char *word){
-  const char * t = word;
+  const char * newWord = word;
 
   int i = 0;
   while(*word++){
@@ -117,9 +116,9 @@ String::String(const char *word){
   value = new char[i];
   int j;
 
-  for(j = 0; *t; t++, j++)
+  for(j = 0; *newWord; newWord++, j++)
   {
-    value[j] = *t;
+    value[j] = *newWord;
   }
   size = j;
 }
@@ -128,7 +127,6 @@ String::String(const char *word){
 // String b = "udhsaduh"
 // a = b
 void String::operator =(const String & word){
-
   const char * newWord = word.value;
   this->value = new char[word.size];
   int j;
@@ -180,10 +178,10 @@ int j;
   {
     value[j] = *newWord;
   }
-  value[j] = '\0';
+//  value[j] = '\0';
 
-  delete[] newWord;
-  delete[] oldWord;
+//  delete[] newWord;
+//  delete[] oldWord;
 
   //std::cout << value << std::endl;
   size = j;
@@ -207,10 +205,10 @@ char* String::operator +(const String& word){
   {
     value[j] = *newWord;
   }
-   value[j] = '\0';
+//   value[j] = '\0';
 
-  delete[] newWord;
-  delete[] oldWord;
+//  delete[] newWord;
+//  delete[] oldWord;
 
   //::cout << value << std::endl;
   size = j;
@@ -272,7 +270,7 @@ char & String::operator[] (unsigned int x)
 
 // length
 int String::length() const{
-  if(value != '\0'){
+  if(value != nullptr){
     return size;
   }else{
     return 0;
@@ -352,16 +350,7 @@ bool operator !=(const String & word, const String & anotherWord){
 // MAIOR
 // a > b
 bool operator >(const String & word, const String & anotherWord){
-  int wordValue = 0;
-  int anotherWordValue = 0;
-  for(int i = 0; i < word.size; i++){
-    wordValue += word.value[i];
-  }
-
-  for(int i = 0; i < anotherWord.size; i++){
-    anotherWordValue += anotherWord.value[i];
-  }
-   return (wordValue > anotherWordValue);
+   return (word.size > anotherWord.size);
 }
 
 // a > "asdq"
@@ -389,21 +378,7 @@ bool operator >(const char* anotherWord, const String & word){
 //--------------------------------------------------------------
 // MENOR
 bool operator <(const String & word, const String & anotherWord){
-  int wordValue = 0;
-  int anotherWordValue = 0;
-
-  for(int i = 0; i < word.size; i++){
-    wordValue += word.value[i];
-  }
-
-  for(int i = 0; i < anotherWord.size; i++){
-    anotherWordValue += anotherWord.value[i];
-  }
-
-//  std::cout << wordValue << std::endl;
-//  std::cout << anotherWordValue << std::endl;
-//  std::cout << (wordValue < anotherWordValue)<< "<" << std::endl;
-  return (wordValue < anotherWordValue);
+  return (word.size < anotherWord.size);
 }
 
 // a < "asdq"
@@ -431,18 +406,7 @@ bool operator <(const char* anotherWord, const String & word){
 //--------------------------------------------------------------
 // MENOR IGUAL
 bool operator <=(const String & word, const String & anotherWord){
-  int wordValue = 0;
-  int anotherWordValue = 0;
-
-  for(int i = 0; i < word.size; i++){
-    wordValue += word.value[i];
-  }
-
-  for(int i = 0; i < anotherWord.size; i++){
-    anotherWordValue += anotherWord.value[i];
-  }
-
-  return (wordValue <= anotherWordValue);
+  return (word.size <= anotherWord.size);
 }
 
 bool operator <=(const char* anotherWord, const String & word){
@@ -468,18 +432,7 @@ bool operator <=(const String & word, const char* anotherWord){
 //--------------------------------------------------------------
 // MAIOR IGUAL
 bool operator >=(const String & word, const String & anotherWord){
-  int wordValue = 0;
-  int anotherWordValue = 0;
-
-  for(int i = 0; i < word.size; i++){
-    wordValue += word.value[i];
-  }
-
-  for(int i = 0; i < anotherWord.size; i++){
-    anotherWordValue += anotherWord.value[i];
-  }
-
-  return (wordValue >= anotherWordValue);
+  return (word.size >= anotherWord.size);
 }
 
 bool operator >=(const char* anotherWord, const String & word){
