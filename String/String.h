@@ -61,7 +61,6 @@ public:
   friend std::ostream & operator<<(std::ostream &, const String &);
   friend std::istream & operator>>(std::istream &, const String &);
 
-  
 private:
   char *value;
   int size;
@@ -82,7 +81,7 @@ private:
 
 //& Is used to get the address
 String::String(){
-  value = nullptr;
+  value = '\0';
   size = 0;
 }
 
@@ -102,22 +101,22 @@ String::String(const String&word){
 
 String::~String(void)
 {
-  std::cout << this->value << std::endl;
+  //std::cout << this->value << std::endl;
   delete[] this->value;
-  this->value = nullptr;
+  //this->value = '\0';
 }
 
 String::String(const char *word){
   const char * t = word;
-  
+
   int i = 0;
   while(*word++){
     i++;
   }
-  
+
   value = new char[i];
   int j;
-  
+
   for(j = 0; *t; t++, j++)
   {
     value[j] = *t;
@@ -129,7 +128,7 @@ String::String(const char *word){
 // String b = "udhsaduh"
 // a = b
 void String::operator =(const String & word){
-  
+
   const char * newWord = word.value;
   this->value = new char[word.size];
   int j;
@@ -140,7 +139,7 @@ void String::operator =(const String & word){
   this->size = j;
 }
 
-//
+// a = "asjdqwi"
 void String::operator =(const char* word)
 {
   const char * newWord = word;
@@ -148,17 +147,19 @@ void String::operator =(const char* word)
   while(*word++){
     i++;
   }
-  
+
   value = new char[i];
   int j;
-  
+
   for(j = 0; *newWord; newWord++, j++)
   {
     value[j] = *newWord;
   }
+
   size = j;
 }
-/*
+
+// a + "asdqwedu"
 char* String::operator +(const char* word){
   const char * newWord = word;
   const char * oldWord = this->value;
@@ -169,7 +170,7 @@ char* String::operator +(const char* word){
     i++;
   }
 
-  value = new char[size + i];
+  value = new char[size + i + 1];
 int j;
   for(j = 0; *oldWord; oldWord++, j++)
   {
@@ -179,57 +180,54 @@ int j;
   {
     value[j] = *newWord;
   }
-    std::cout << value << std::endl << std::endl;
-  delete newWord;
-  delete oldWord;
+  value[j] = '\0';
+
+  delete[] newWord;
+  delete[] oldWord;
 
   //std::cout << value << std::endl;
-  return value;
   size = j;
+  return value;
 }
 
 // a + b
 char* String::operator +(const String& word){
-  const char * newWord = word.value; // char *
-  const char * oldWord = this->value; // char *
-delete newWord;
-    std::cout << newWord << std::endl << std::endl;
-  value = new char[size];
+  const char *newWord = word.value; // char *
+  const char *oldWord = this->value; // char *
 
-    std::cout << size << " " << word.size << std::endl << std::endl;
-  int j;
-  for(j = 0; *oldWord; oldWord++, j++)
+  value = new char[size + word.size + 1];
+
+  int j = 0;
+  for(int i = 0; j < size; i++, j++)
   {
-    value[j] = *oldWord;
+    value[j] = oldWord[i];
   }
-    value = new char[size + word.size];
 
-  for(j = j ; *newWord; newWord++ , j++)
+  for(int i = 0 ; j < size + word.size; newWord++ ,i++, j++)
   {
     value[j] = *newWord;
-    std::cout << value<< std::endl << std::endl;
-    //std::cout << newWord << std::endl << std::endl;
   }
+   value[j] = '\0';
 
-  delete newWord;
-  delete oldWord;
+  delete[] newWord;
+  delete[] oldWord;
 
-  std::cout << value << std::endl;
-  return value;
+  //::cout << value << std::endl;
   size = j;
-}*/
+  return value;
+}
 
 //a = "felipe"
 // a += " strozberg"
 void String::operator +=(const char* word){
   const char * newWord = word;
   const char * oldWord = this->value;
-  
+
   int i = 0;
   while(*word++){
     i++;
   }
-  
+
   value = new char[size + i];
   int j;
   for(j = 0; *oldWord; oldWord++, j++)
@@ -241,7 +239,7 @@ void String::operator +=(const char* word){
     value[j] = *newWord;
   }
 
-  std::cout << value << std::endl;
+  //std::cout << value << std::endl;
   size = j;
 }
 //void operator += (const String&);
@@ -249,15 +247,15 @@ void String::operator +=(const char* word){
 void String::operator +=(const String &word){
   const char * newWord = word.value; // char *
   const char * oldWord = this->value; // char *
-  
+
   value = new char[size + word.size];
-  
+
   int j;
   for(j = 0; *oldWord; oldWord++, j++)
   {
     value[j] = *oldWord;
   }
-  
+
   for(int i = 0 ; j < size + word.size; i++, j++)
   {
     value[j] = newWord[i];
@@ -274,13 +272,13 @@ char & String::operator[] (unsigned int x)
 
 // length
 int String::length() const{
-  if(value != nullptr){
+  if(value != '\0'){
     return size;
   }else{
     return 0;
   }
 }
-//
+
 int String::indexOf(char letter) const{
   for(int i = 0; i < size; i++){
     if(value[i] == letter) { return i; }
@@ -313,6 +311,7 @@ void String::togglecase(int start, int finish){
     }
   }
 }
+
 
 
 // ----------------------  OPERADORES LÓGICOS  ----------------------
@@ -531,9 +530,9 @@ std::istream& operator >> (std::istream& in, const String& s)
   //    in >> s.value[i];
   //  }
   //  return in;
-  
+
   in >> s.value;
-  
+
   return in;
 }
 
