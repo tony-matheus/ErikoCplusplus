@@ -308,7 +308,9 @@ void String::togglecase(int start, int finish){
   }
 }
 
-// Operadores Lógicos
+
+// ----------------------  OPERADORES LÓGICOS  ----------------------
+
 bool operator ==(const String & word, const String & anotherWord){
   if(word.length() == anotherWord.length()){
     for(int i = 0; i < word.length(); i++){
@@ -341,23 +343,23 @@ bool operator !=(const String & word, const String & anotherWord){
   return false;
 }
 
-//bool operator >(const String & word, const String & anotherWord){
-//  int wordValue = 0;
-//  int anotherWordValue = 0;
-//  for(int i = 0; i < word.size; i++){
-//    wordValue += word.value[i];
-//  }
-//
-//  for(int i = 0; i < anotherWord.size; i++){
-//    anotherWordValue += anotherWord.value[i];
-//  }
-//  return (wordValue > anotherWordValue);
-//}
-
+//--------------------------------------------------------------
+// MAIOR
+// a > b
 bool operator >(const String & word, const String & anotherWord){
-  return (word.size > anotherWord.size)
+  int wordValue = 0;
+  int anotherWordValue = 0;
+  for(int i = 0; i < word.size; i++){
+    wordValue += word.value[i];
+  }
+
+  for(int i = 0; i < anotherWord.size; i++){
+    anotherWordValue += anotherWord.value[i];
+  }
+   return (wordValue > anotherWordValue);
 }
 
+// a > "asdq"
 bool operator >(const String & word, const char* anotherWord){
   const char * newWord = anotherWord;
   int length = 0;
@@ -368,6 +370,19 @@ bool operator >(const String & word, const char* anotherWord){
   return (word.size > length);
 }
 
+// "asdd" > a
+bool operator >(const char* anotherWord, const String & word){
+  const char * newWord = anotherWord;
+  int length = 0;
+  while(*newWord++){
+    length++;
+  }
+  
+  return (length > word.size);
+}
+
+//--------------------------------------------------------------
+// MENOR
 bool operator <(const String & word, const String & anotherWord){
   int wordValue = 0;
   int anotherWordValue = 0;
@@ -386,6 +401,30 @@ bool operator <(const String & word, const String & anotherWord){
   return (wordValue < anotherWordValue);
 }
 
+// a < "asdq"
+bool operator <(const String & word, const char* anotherWord){
+  const char * newWord = anotherWord;
+  int length = 0;
+  while(*newWord++){
+    length++;
+  }
+  
+  return (word.size < length);
+}
+
+// "asdd" < a
+bool operator <(const char* anotherWord, const String & word){
+  const char * newWord = anotherWord;
+  int length = 0;
+  while(*newWord++){
+    length++;
+  }
+  
+  return (length < word.size);
+}
+
+//--------------------------------------------------------------
+// MENOR IGUAL
 bool operator <=(const String & word, const String & anotherWord){
   int wordValue = 0;
   int anotherWordValue = 0;
@@ -401,6 +440,28 @@ bool operator <=(const String & word, const String & anotherWord){
   return (wordValue <= anotherWordValue);
 }
 
+bool operator <=(const char* anotherWord, const String & word){
+  const char * newWord = anotherWord;
+  int length = 0;
+  while(*newWord++){
+    length++;
+  }
+  
+  return (length <= word.size);
+}
+// "asdd" <= a
+bool operator <=(const char* anotherWord, const String & word){
+  const char * newWord = anotherWord;
+  int length = 0;
+  while(*newWord++){
+    length++;
+  }
+  
+  return (length <= word.size);
+}
+
+//--------------------------------------------------------------
+// MAIOR IGUAL
 bool operator >=(const String & word, const String & anotherWord){
   int wordValue = 0;
   int anotherWordValue = 0;
@@ -413,11 +474,30 @@ bool operator >=(const String & word, const String & anotherWord){
     anotherWordValue += anotherWord.value[i];
   }
   
-//  std::cout << wordValue << std::endl;
-//  std::cout << anotherWordValue << std::endl;
-//  std::cout << (wordValue >= anotherWordValue)<< ">=" << std::endl;
   return (wordValue >= anotherWordValue);
 }
+
+bool operator >=(const char* anotherWord, const String & word){
+  const char * newWord = anotherWord;
+  int length = 0;
+  while(*newWord++){
+    length++;
+  }
+  
+  return (length >= word.size);
+}
+
+bool operator >=(const char* anotherWord, const String & word){
+  const char * newWord = anotherWord;
+  int length = 0;
+  while(*newWord++){
+    length++;
+  }
+  
+  return (length >= word.size);
+}
+
+//--------------------------------------------------------------
 
 std::ostream & operator<<(std::ostream &os, const String &s)
 {
