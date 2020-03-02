@@ -39,18 +39,29 @@ public:
   friend bool operator ==(const String &, const String &);
   friend bool operator !=(const String &, const String &);
   
-  // String a ;
+// String a ;
   friend bool operator >(const String &, const String &); // a > b
   friend bool operator >(const String &, const char*); // a > "sadasd"
   friend bool operator >(const char *, const String &); // "sadasd" > a
   
   
-  friend bool operator <(const String &, const String &);
+  friend bool operator <(const String &, const String &); // a < b
+  friend bool operator <(const String &, const char*); // a > "sadasd"
+  friend bool operator <(const char *, const String &); // "sadasd" > a
+  
+  friend bool operator >=(const String &, const String &); // a > b
+  friend bool operator >=(const String &, const char*); // a > "sadasd"
+  friend bool operator >=(const char *, const String &); // "sadasd" > a
+
+  friend bool operator <=(const String &, const String &); // a > b
+  friend bool operator <=(const String &, const char*); // a > "sadasd"
+  friend bool operator <=(const char *, const String &); // "sadasd" > a
   friend bool operator >=(const String &, const String &);
   friend bool operator <=(const String &, const String &);
   
   friend std::ostream & operator<<(std::ostream &, const String &);
   friend std::istream & operator>>(std::istream &, const String &);
+  
 private:
   char *value;
   int size;
