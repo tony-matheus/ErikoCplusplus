@@ -282,13 +282,15 @@ int String::indexOf(char letter) const{
   return -1;
 }
 
-
+// felipe
+// FELIPE
 void String::upcase(int start, int finish){
   for( int i = start; i < finish; i++){
     value[i] = value[i] - 32;
   }
 }
-
+// FeLIPe
+// felipe
 void String::downcase(int start, int finish){
   for( int i = start; i < finish; i++){
     value[i] = value[i] + 32;
