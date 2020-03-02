@@ -46,12 +46,15 @@ void testB(){
 
 void testC(){
   cout << "Starting Test C" << endl;
-  String testC;
-    testC = "Test C 1";
-    String testCI;
-    testCI = "Test C 2";
+    String testC;
+    testC = "Felipe ";
+  
+    //String testCI;
+    //testCI = "Strozberg";
+  
     String completeString;
-    completeString = testC+testCI;
+    //completeString = testC+testCI;
+    completeString = testC+"Strozberg";
 
     cout << completeString << endl;
   cout << "Finish Test C" << endl << endl;
