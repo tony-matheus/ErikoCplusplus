@@ -517,6 +517,20 @@ std::ostream & operator<<(std::ostream &os, const String &s)
 //  return in;
 //}
 
+std::istream& operator >> (std::istream& in, const String& s)
+{
+
+  // for(int i = 0; i < s.size; i++)
+  //  {
+  //    in >> s.value[i];
+  //  }
+  //  return in;
+  
+  in >> s.value;
+  
+  return in;
+}
+
 
 
 #endif /* String_h */
