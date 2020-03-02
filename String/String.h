@@ -2,8 +2,8 @@
 //  String.h
 //  String
 //
-//  Created by Tony Matheus on 13/02/20.
-//  Copyright © 2020 Tony Matheus. All rights reserved.
+//  Created by Tony Matheus and Felipe Strozberg on 13/02/20.
+//  Copyright © 2020 Tony Matheus / Felipe Strozberg. All rights reserved.
 //
 
 #ifndef String_h
@@ -17,38 +17,39 @@ public:
   String(const char*);
   String(const String&);
   ~String(void);
-  
-  
+
+
   int length() const;
   int indexOf(char) const;
   void upcase(int, int);
   void downcase(int, int);
   void togglecase(int, int);
-  
+
   void operator =(const char*);
   void operator =(const String&);
-  
+
   void operator += (const char*);
   void operator += (const String&);
   // a = "suadha" + "saudasudh"l
   // a = b + "saduhas"
-  friend String operator +(const char*, const String&);
-  
+  char* operator +(const char*);
+  char* operator +(const String&);
+
   char& operator[] (unsigned int);
-  
+
   friend bool operator ==(const String &, const String &);
   friend bool operator !=(const String &, const String &);
-  
-// String a ;
+
+  // String a ;
   friend bool operator >(const String &, const String &); // a > b
   friend bool operator >(const String &, const char*); // a > "sadasd"
   friend bool operator >(const char *, const String &); // "sadasd" > a
-  
-  
+
+
   friend bool operator <(const String &, const String &); // a < b
   friend bool operator <(const String &, const char*); // a > "sadasd"
   friend bool operator <(const char *, const String &); // "sadasd" > a
-  
+
   friend bool operator >=(const String &, const String &); // a > b
   friend bool operator >=(const String &, const char*); // a > "sadasd"
   friend bool operator >=(const char *, const String &); // "sadasd" > a
@@ -56,9 +57,10 @@ public:
   friend bool operator <=(const String &, const String &); // a > b
   friend bool operator <=(const String &, const char*); // a > "sadasd"
   friend bool operator <=(const char *, const String &); // "sadasd" > a
-  
+
   friend std::ostream & operator<<(std::ostream &, const String &);
   friend std::istream & operator>>(std::istream &, const String &);
+
   
 private:
   char *value;
@@ -156,12 +158,11 @@ void String::operator =(const char* word)
   }
   size = j;
 }
-
-// a + "asdqwedu"
+/*
 char* String::operator +(const char* word){
   const char * newWord = word;
   const char * oldWord = this->value;
-  
+
   int i = 0;
 
   while(*word++){
@@ -169,7 +170,7 @@ char* String::operator +(const char* word){
   }
 
   value = new char[size + i];
-
+int j;
   for(j = 0; *oldWord; oldWord++, j++)
   {
     value[j] = *oldWord;
@@ -178,11 +179,12 @@ char* String::operator +(const char* word){
   {
     value[j] = *newWord;
   }
+    std::cout << value << std::endl << std::endl;
+  delete newWord;
+  delete oldWord;
 
-  delete[] newWord;
-  delete[] oldWord;
-
-  std::cout << value << std::endl;
+  //std::cout << value << std::endl;
+  return value;
   size = j;
 }
 
@@ -190,26 +192,32 @@ char* String::operator +(const char* word){
 char* String::operator +(const String& word){
   const char * newWord = word.value; // char *
   const char * oldWord = this->value; // char *
-  
-  value = new char[size + word.size];
-  
+delete newWord;
+    std::cout << newWord << std::endl << std::endl;
+  value = new char[size];
+
+    std::cout << size << " " << word.size << std::endl << std::endl;
   int j;
   for(j = 0; *oldWord; oldWord++, j++)
   {
     value[j] = *oldWord;
   }
-  
-  for(int i = 0 ; j < size + word.size; i++, j++)
+    value = new char[size + word.size];
+
+  for(j = j ; *newWord; newWord++ , j++)
   {
-    value[j] = newWord[i];
+    value[j] = *newWord;
+    std::cout << value<< std::endl << std::endl;
+    //std::cout << newWord << std::endl << std::endl;
   }
 
-  delete[] newWord;
-  delete[] oldWord;
+  delete newWord;
+  delete oldWord;
 
   std::cout << value << std::endl;
+  return value;
   size = j;
-}
+}*/
 
 //a = "felipe"
 // a += " strozberg"
