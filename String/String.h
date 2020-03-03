@@ -10,6 +10,7 @@
 #define String_h
 #include <typeinfo>
 
+using namespace std;
 class String {
 public:
   String();
@@ -164,31 +165,26 @@ void String::operator =(const char* word)
 char* String::operator +(const char* word){
   const char * newWord = word;
   const char * oldWord = this->value;
-
+  
   int i = 0;
-
   while(*word++){
     i++;
   }
-
-  value = new char[size + i + 1];
-int j;
+  
+  char * returningWord;
+  returningWord = new char[size + i];
+  
+  int j;
   for(j = 0; *oldWord; oldWord++, j++)
   {
-    value[j] = *oldWord;
+    returningWord[j] = *oldWord;
   }
   for(j = j; *newWord; newWord++, j++)
   {
-    value[j] = *newWord;
+    returningWord[j] = *newWord;
   }
-//  value[j] = '\0';
-
-//  delete[] newWord;
-//  delete[] oldWord;
-
-  //std::cout << value << std::endl;
-  size = j;
-  return value;
+  
+  return returningWord;
 }
 
 // a + b
@@ -196,26 +192,20 @@ char* String::operator +(const String& word){
   const char *newWord = word.value; // char *
   const char *oldWord = this->value; // char *
 
-  value = new char[size + word.size + 1];
+  char * returningWord = new char[size + word.size + 1];
 
-  int j = 0;
-  for(int i = 0; j < size; i++, j++)
+  
+  int j;
+  for(j = 0; *oldWord; oldWord++, j++)
   {
-    value[j] = oldWord[i];
+    returningWord[j] = *oldWord;
   }
 
-  for(int i = 0 ; j < size + word.size; newWord++ ,i++, j++)
+  for(j = j ; *newWord; newWord++, j++)
   {
-    value[j] = *newWord;
+    returningWord[j] = *newWord;
   }
-//   value[j] = '\0';
-
-//  delete[] newWord;
-//  delete[] oldWord;
-
-  //::cout << value << std::endl;
-  size = j;
-  return value;
+  return returningWord;
 }
 
 //a = "felipe"
@@ -379,8 +369,6 @@ bool operator !=(const String & word, const String & anotherWord){
     return true;
   } else {
     for(int i = 0; i < word.length(); i++){
-      std::cout << word.value << std::endl;
-      std::cout << anotherWord.value << std::endl;
       if(word.value[i] != anotherWord.value[i]) {
         return true;
       }
@@ -397,10 +385,16 @@ bool operator !=(const String & word, const char* anotherWord ){
     length++;
   }
   if(word.length() != length){
+    cout << word.value << endl;
+    cout << word.size << endl;
+    cout << word.length() << endl;
+    cout << anotherWord << endl;
     return true;
   } else{
     for(int i = 0;  *anotherWord; anotherWord++, i++){
-      if(word.value[i] == *anotherWord) {
+      if(word.value[i] != *anotherWord) {
+        cout << word.value[i];
+        cout << anotherWord;
         return true;
       }
     }

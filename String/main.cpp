@@ -16,21 +16,15 @@ using namespace std;
 int testA() {
   cout << "Starting Test A" << endl;
   String itemAI;
-  cout << &itemAI << endl;
+  cout << itemAI << endl;
   String itemAII = 'b';
   cout << itemAII << endl;
-
-  if( itemAII != "b"){
-    cout << "Not Working" << endl;
-    return 0;
-  }
-  
   String itemAIIb = "b";
   cout << itemAIIb << endl;
 
   
   if( itemAIIb != "b"){
-    cout << "Not Working" << endl;
+    cout << "Not Working First " << endl;
     return 0;
   }
   String itemAIII = "Some Kind of test";
@@ -38,7 +32,7 @@ int testA() {
 
   
   if( itemAIII != "Some Kind of test"){
-    cout << "Not Working" << endl;
+    cout << "Not Working Second" << endl;
     return 0;
   }
   cout << "Finish Test A" << endl << endl;
@@ -52,14 +46,13 @@ int testB(){
   testB = "Test B";
   
   String testBI = "Test BI";
-  if(testB < testBI){
-    cout << testBI <<"sei la" << endl;
+  if(testB > testBI){
+    cout << "Not Working First" << endl;
   }
-  testBI = testB;
   
-  if(testB == testBI){
-    cout <<" Works!!" << endl;
-    return 0;
+  if(testB != testBI){
+    cout <<" Not Working Second" << endl;
+    return 1;
   }
 
   cout << testBI << " Test()" << endl;
@@ -70,21 +63,21 @@ int testB(){
 
 int testC(){
   cout << "Starting Test C" << endl;
-    String testC;
-    testC = "Felipe ";
-    
-    //String testCI;
-    //testCI = "Strozberg";
-  
-    String completeString;
-    //completeString = testC+testCI;
-    completeString = testC + "Strozberg";
-    if( completeString != "Felipe Strozberg"){
-      cout << "Not Working" << endl;
-      return 0;
-    }
-    cout << completeString << endl;
-  cout << "Finish Test C" << endl << endl;
+  String steve = "Steve";
+  String jobs;
+  jobs = " Jobs";
+  steve = steve + jobs;
+  if(steve != "Steve Jobs"){
+    cout << "Not Working" << endl;
+    return 0;
+  }
+
+//  steve = "Steve";
+//  steve = steve + "aduhas"
+//  if(steve != "Steve William"){
+//    cout << "Not Working" << endl;
+//    return 0;
+//  }
   return 1;
 }
 
@@ -378,28 +371,15 @@ int testK5(){
 }
 
 int main(int argc, const char * argv[]) {
-//  if(testA() == 0){ cout << "NOT WORKING First" << endl; return 0; }
-//  if(testB() == 0){ cout << "NOT WORKING First" << endl; return 0; }
-//  if(testC() == 0){ cout << "NOT WORKING First" << endl; return 0; }
-//  if(testD() == 0){ cout << "NOT WORKING First" << endl; return 0; }
-//  if(testE() == 0){ cout << "NOT WORKING First" << endl; return 0; }
-//  if(testF() == 0){ cout << "NOT WORKING First" << endl; return 0; }
-//  if(testG() == 0){ cout << "NOT WORKING First" << endl; return 0; }
-//  if(testH() == 0){ cout << "NOT WORKING First" << endl; return 0; }
-//  if(testI() == 0){ cout << "NOT WORKING First" << endl; return 0; }
-//  if(testJ() == 0){ cout << "NOT WORKING First" << endl; return 0; }
-//  if(testK1() == 0){ cout << "NOT WORKING First" << endl; return 0; }
-//  if(testK2() == 0){ cout << "NOT WORKING First" << endl; return 0; }
-//  if(testK3() == 0){ cout << "NOT WORKING First" << endl; return 0; }
-//  if(testK4() == 0){ cout << "NOT WORKING First" << endl; return 0; }
-//  if(testK5() == 0){ cout << "NOT WORKING First" << endl; return 0; }
+  String* a = new String("tony");
+  String* b = new String("teste");
   
-  String a = "oid";
-  String b = "oid";
-  if( a != b ){
-    cout << "deu bom" << endl;
-    return 1;
-  }
-  cout << "deu bom2" << endl;
-  return 1;
+  a = b;
+  
+  String* c = new String();
+  
+  *c = *a + "ys";
+  
+  cout << *c << endl;
+  
 }
