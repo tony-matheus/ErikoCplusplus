@@ -269,7 +269,7 @@ int String::length() const{
     return 0;
   }
 }
-
+//
 int String::indexOf(char letter) const{
   for(int i = 0; i < size; i++){
     if(value[i] == letter) { return i; }
