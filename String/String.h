@@ -36,15 +36,19 @@ public:
   char* operator +(const String&);
 
   char& operator[] (unsigned int);
-
+  
   friend bool operator ==(const String &, const String &);
+  friend bool operator ==(const String &, const char*);
+  friend bool operator ==(const char *, const String &);
+  
   friend bool operator !=(const String &, const String &);
+  friend bool operator !=(const String &, const char*);
+  friend bool operator !=(const char *, const String &);
 
   // String a ;
   friend bool operator >(const String &, const String &); // a > b
   friend bool operator >(const String &, const char*); // a > "sadasd"
   friend bool operator >(const char *, const String &); // "sadasd" > a
-
 
   friend bool operator <(const String &, const String &); // a < b
   friend bool operator <(const String &, const char*); // a > "sadasd"
@@ -101,8 +105,7 @@ String::String(const String&word){
 
 String::~String(void)
 {
-  delete[] this->value;
-  this->value = nullptr;
+  delete[] value;
 }
 
 String::String(const char *word){
@@ -329,18 +332,96 @@ bool operator ==(const String & word, const String & anotherWord){
   return true;
 }
 
+bool operator ==(const String & word, const char* anotherWord ){
+  const char * compareWord = anotherWord;
+  int length = 0;
+  
+  while(*compareWord++){
+    length++;
+  }
+  if(word.length() == length){
+    for(int i = 0; *anotherWord; anotherWord++, i++){
+      if(word.value[i] != *anotherWord) {
+        return false;
+      }
+    }
+  }
+  else
+  {
+    return false;
+  }
+  return true;
+}
+
+bool operator ==(const char* anotherWord, const String & word ){
+  const char * compareWord = anotherWord;
+  int length = 0;
+  
+  while(*compareWord++){
+    length++;
+  }
+  if(word.length() == length){
+    for(int i = 0; *anotherWord; anotherWord++, i++){
+      if(word.value[i] != *anotherWord) {
+        return false;
+      }
+    }
+  }
+  else
+  {
+    return false;
+  }
+  return true;
+}
+
 bool operator !=(const String & word, const String & anotherWord){
   if(word.length() != anotherWord.length()){
     return true;
   } else {
-    int validate = 0;
     for(int i = 0; i < word.length(); i++){
-      if(word.value[i] == anotherWord.value[i]) {
-        validate++;
+      std::cout << word.value << std::endl;
+      std::cout << anotherWord.value << std::endl;
+      if(word.value[i] != anotherWord.value[i]) {
+        return true;
       }
     }
-    if(validate > 0){
-      return true;
+  }
+  return false;
+}
+
+bool operator !=(const String & word, const char* anotherWord ){
+  const char * compareWord = anotherWord;
+  int length = 0;
+  
+  while(*compareWord++){
+    length++;
+  }
+  if(word.length() != length){
+    return true;
+  } else{
+    for(int i = 0;  *anotherWord; anotherWord++, i++){
+      if(word.value[i] == *anotherWord) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+bool operator !=(const char* anotherWord, const String & word ){
+  const char * compareWord = anotherWord;
+  int length = 0;
+  
+  while(*compareWord++){
+    length++;
+  }
+  if(word.length() != length){
+    return true;
+  } else{
+    for(int i = 0;  *anotherWord; anotherWord++, i++){
+      if(word.value[i] != *anotherWord) {
+        return true;
+      }
     }
   }
   return false;
